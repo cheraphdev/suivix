@@ -1,0 +1,49 @@
+const Discord = require("discord.js");
+const config = require("../config");
+const messagesSchema = require("../models/messagesSchema");
+
+module.exports = {
+    name: 'embed',
+    run: async (message, args, client) => {
+
+        message.delete()
+
+        let button = new Discord.ActionRowBuilder()
+            .addComponents(
+                new Discord.ButtonBuilder()
+                    .setCustomId("messagesCount")
+                    .setLabel("Voir vos message(s)")
+                    .setEmoji("📬")
+                    .setStyle(Discord.ButtonStyle.Primary)
+                    .setDisabled(false),
+
+                new Discord.ButtonBuilder()
+                    .setCustomId("leaderboard")
+                    .setLabel("Leaderboard")
+                    .setEmoji("🏆")
+                    .setStyle(Discord.ButtonStyle.Primary)
+                    .setDisabled(false),
+
+                new Discord.ButtonBuilder()
+                    .setCustomId("statsbot")
+                    .setLabel("Statistique")
+                    .setEmoji("📊")
+                    .setStyle(Discord.ButtonStyle.Primary)
+                    .setDisabled(false),
+
+                new Discord.ButtonBuilder()
+                    .setLabel("Invite Suivix")
+                    .setEmoji("<:suivixlogo:1079932737483448340>")
+                    .setURL(config.bot.inviteUrl)
+                    .setStyle(Discord.ButtonStyle.Link)
+            )
+
+        const adminEmbed = new Discord.EmbedBuilder()
+            .setColor(config.colors.default)
+            .setAuthor({name: `${client.user.username}#${client.user.discriminator}`, iconURL: `${client.user.displayAvatarURL()}`})
+            .setDescription(`<@${client.user.id}> est l'un des **meilleurs bots qui gèrent automatiquement les publicités**. Sa mission est de **simplifier la vie de votre serveur publicitaire** tout en étant accessible à tous.\nPour cela, il ne dispose de plusieurs cordes à son arc t'elle que son système de modération des publicités ou bien le tracking de messages et bien plus encore 😎\n\n__**Fonctionnalité:**__\n> 1. Un système de **message automatique** après chaque pub envoyé (personnalisable).\n> 2. Un système de **logs** pour ne rien louper aux publicités vérifiées par votre équipe (personnalisable).\n> 3. Un système **d'arriver des pubs** pour que votre équipe puisse **refuser/accepter** une publicité (personnalisable).\n> 4. Un système de **tracking des messages** pour pouvoir donner un petit goût de fun sur votre serveur.\n> 5. Un sytème pour customiser le **prefix** de <@${client.user.id}> (personnalisable).\n> 6. Un système de personnalisation des réactions en dessous des publicités.\n\n<@${client.user.id}> à été développer par \`cheraph#6290\` avec l'[open-source](https://github.com/ceedledev/UtilityPub) de \`Ceed#2117\` et améliorer vers la \`v14.7.1\` de **discord.js** !`)
+            .setFooter({ text: 'Suivix aide votre serveur publicitaire 😁', iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+        return message.channel.send({ embeds: [ adminEmbed ], components: [ button ] })
+
+    }
+}
