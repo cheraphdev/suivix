@@ -1,6 +1,6 @@
 <img width="150" height="150" style="float: left; margin: 0 10px 0 0;" alt="Suivix" src="./_assets/suivixads-logo.png">  
 
-# InviteFetcher
+# Suivix
 [![discord](https://img.shields.io/discord/1079932687168589936?style=for-the-badge&color=7289DA&label=Discord)](https://discord.gg/4CMFVSyqPB)
 
 > Suivix est utilisé par + 19k utilisateurs sur + 9 serveur !
